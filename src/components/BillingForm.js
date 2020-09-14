@@ -8,7 +8,7 @@ import "./BillingForm.css";
 function BillingForm({ isLoading, onSubmit, ...props }) {
   const [fields, handleFieldChange] = useFormFields({
     name: "",
-    storage: ""
+    storage: "",
   });
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCardComplete, setIsCardComplete] = useState(false);
@@ -16,11 +16,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
   isLoading = isProcessing || isLoading;
 
   function validateForm() {
-    return (
-      fields.name !== "" &&
-      fields.storage !== "" &&
-      isCardComplete
-    );
+    return fields.name !== "" && fields.storage !== "" && isCardComplete;
   }
 
   async function handleSubmitClick(event) {
@@ -28,7 +24,9 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
 
     setIsProcessing(true);
 
-    const { token, error } = await props.stripe.createToken({ name: fields.name });
+    const { token, error } = await props.stripe.createToken({
+      name: fields.name,
+    });
 
     setIsProcessing(false);
 
@@ -60,9 +58,9 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
       <ControlLabel>Credit Card Info</ControlLabel>
       <CardElement
         className="card-field"
-        onChange={e => setIsCardComplete(e.complete)}
+        onChange={(e) => setIsCardComplete(e.complete)}
         style={{
-          base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
+          base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' },
         }}
       />
       <LoaderButton
