@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import Dealer from "./containers/Dealer";
 import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
@@ -18,6 +19,9 @@ export default function Routes() {
       </Route>
       <UnauthenticatedRoute exact path="/login">
         <Login />
+      </UnauthenticatedRoute>
+      <UnauthenticatedRoute exact path="/dealer">
+        <Dealer />
       </UnauthenticatedRoute>
       <UnauthenticatedRoute exact path="/signup">
         <Signup />
