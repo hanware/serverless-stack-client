@@ -6,8 +6,6 @@ import {
   ControlLabel,
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 
 export default function AddDealer() {
     const [fields, handleFieldChange] = useFormFields({
@@ -16,6 +14,7 @@ export default function AddDealer() {
         phone: "",
         dealershipname: "",
         address: "",
+        city: "",
         postalcode: "",
         province: "",
     });
@@ -59,28 +58,44 @@ export default function AddDealer() {
               onChange={handleFieldChange}
             />
           </FormGroup>
-          <FormGroup controlId="confirmPassword" bsSize="large">
+          <FormGroup controlId="dealershipname" bsSize="large">
+            <ControlLabel>Dealership Name</ControlLabel>
+            <FormControl
+              type="text"
+              onChange={handleFieldChange}
+              value={fields.text}
+            />
+            </FormGroup>
+          <FormGroup controlId="address" bsSize="large">
             <ControlLabel>Address</ControlLabel>
             <FormControl
-              type="password"
+              type="text"
               onChange={handleFieldChange}
-              value={fields.confirmPassword}
+              value={fields.text}
             />
-          </FormGroup>
-          <FormGroup controlId="confirmPassword" bsSize="large">
-            <ControlLabel>Postal Code</ControlLabel>
+            </FormGroup>
+          <FormGroup controlId="city" bsSize="large">
+            <ControlLabel>City</ControlLabel>
             <FormControl
-              type="password"
+              type="text"
               onChange={handleFieldChange}
-              value={fields.confirmPassword}
+              value={fields.text}
             />
           </FormGroup>
-          <FormGroup controlId="confirmPassword" bsSize="large">
+          <FormGroup controlId="province" bsSize="large">
             <ControlLabel>Province</ControlLabel>
             <FormControl
-              type="password"
+              type="text"
               onChange={handleFieldChange}
-              value={fields.confirmPassword}
+              value={fields.text}
+            />
+          </FormGroup>
+          <FormGroup controlId="postalcode" bsSize="large">
+            <ControlLabel>Postal Code</ControlLabel>
+            <FormControl
+              type="text"
+              onChange={handleFieldChange}
+              value={fields.text}
             />
           </FormGroup>
           <LoaderButton
