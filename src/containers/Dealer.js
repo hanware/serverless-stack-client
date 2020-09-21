@@ -2,13 +2,10 @@ import React, { useRef, useState } from "react";
 import { useFormFields } from "../libs/hooksLib";
 import {FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
-<<<<<<< HEAD
-=======
 import { onError } from "../libs/errorLib";
 import config from "../config";
 import "./NewNote.css";
 import { s3Upload } from "../libs/awsLibs"
->>>>>>> abcd2bd005fe12fa685a303155cf75243d14c89b
 
 export default function AddDealer() {
     const [fields, handleFieldChange] = useFormFields({
