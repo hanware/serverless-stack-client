@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useFormFields } from "../libs/hooksLib";
-import {
-  FormGroup,
-  FormControl,
-  ControlLabel,
-} from "react-bootstrap";
+import {FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
+<<<<<<< HEAD
+=======
+import { onError } from "../libs/errorLib";
+import config from "../config";
+import "./NewNote.css";
+import { s3Upload } from "../libs/awsLibs"
+>>>>>>> abcd2bd005fe12fa685a303155cf75243d14c89b
 
 export default function AddDealer() {
     const [fields, handleFieldChange] = useFormFields({
@@ -14,14 +17,37 @@ export default function AddDealer() {
         phone: "",
         dealershipname: "",
         address: "",
+        city: "",
         postalcode: "",
         province: "",
     });
     const [isLoading, setIsLoading] = useState(false);
     const [content, setContent] = useState("");
+    const file = useRef(null);
 
     async function handleSubmit(event) {
+      event.preventDefault();
 
+      if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
+        // alert(
+        //   `Please pick a file smaller than ${
+        //   config.MAX_ATTACHMENT_SIZE / 1000000
+        //   } MB.`
+        // );
+        return;
+      }
+
+      setIsLoading(true);
+
+      try {
+        const attachment = file.current ? await s3Upload(file.current) : null;
+
+        // await createNote({ content, attachment });
+        // history.push("/");
+      } catch (e) {
+        onError(e);
+        setIsLoading(false);
+      }
     }
 
     function validateForm() {
@@ -57,28 +83,44 @@ export default function AddDealer() {
               onChange={handleFieldChange}
             />
           </FormGroup>
-          <FormGroup controlId="confirmPassword" bsSize="large">
+          <FormGroup controlId="dealershipname" bsSize="large">
+            <ControlLabel>Dealership Name</ControlLabel>
+            <FormControl
+              type="text"
+              onChange={handleFieldChange}
+              value={fields.text}
+            />
+            </FormGroup>
+          <FormGroup controlId="address" bsSize="large">
             <ControlLabel>Address</ControlLabel>
             <FormControl
-              type="password"
+              type="text"
               onChange={handleFieldChange}
-              value={fields.confirmPassword}
+              value={fields.text}
             />
-          </FormGroup>
-          <FormGroup controlId="confirmPassword" bsSize="large">
-            <ControlLabel>Postal Code</ControlLabel>
+            </FormGroup>
+          <FormGroup controlId="city" bsSize="large">
+            <ControlLabel>City</ControlLabel>
             <FormControl
-              type="password"
+              type="text"
               onChange={handleFieldChange}
-              value={fields.confirmPassword}
+              value={fields.text}
             />
           </FormGroup>
-          <FormGroup controlId="confirmPassword" bsSize="large">
+          <FormGroup controlId="province" bsSize="large">
             <ControlLabel>Province</ControlLabel>
             <FormControl
-              type="password"
+              type="text"
               onChange={handleFieldChange}
-              value={fields.confirmPassword}
+              value={fields.text}
+            />
+          </FormGroup>
+          <FormGroup controlId="postalcode" bsSize="large">
+            <ControlLabel>Postal Code</ControlLabel>
+            <FormControl
+              type="text"
+              onChange={handleFieldChange}
+              value={fields.text}
             />
           </FormGroup>
           <LoaderButton

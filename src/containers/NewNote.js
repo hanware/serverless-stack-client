@@ -56,6 +56,7 @@ export default function NewNote() {
 
   return (
     <div className="NewNote">
+      <body>
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="content">
           <FormControl
@@ -79,6 +80,7 @@ export default function NewNote() {
           Create
         </LoaderButton>
       </form>
+      </body>
     </div>
   );
 }
