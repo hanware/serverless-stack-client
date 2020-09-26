@@ -2,17 +2,17 @@ const dev = {
   STRIPE_KEY: "pk_test_EmZV7k4Cgusn315QrzofA9Ue00g0mID0HT",
   s3: {
     REGION: "us-west-2",
-    BUCKET: "notes-app-uploads03"
+    BUCKET: "dealership-app-uploads"
   },
   apiGateway: {
     REGION: "us-west-2",
-    URL: "https://y2vm0qy8lb.execute-api.us-west-2.amazonaws.com/dev"
+    URL: "https://xbg9ahwpq7.execute-api.us-west-2.amazonaws.com/dev"
   },
   cognito: {
     REGION: "us-west-2",
-    USER_POOL_ID: "us-west-2_SXMOOOIE1",
-    APP_CLIENT_ID: "6882lvuhfevt03i9dippbrd80n",
-    IDENTITY_POOL_ID: "us-west-2:c6c5ec24-d59c-45a2-a8e9-21e58c50bc33"
+    USER_POOL_ID: "us-west-2_VNouWhbgF",
+    APP_CLIENT_ID: "n4kj6jfadh8n0l9hlonmhlr44",
+    IDENTITY_POOL_ID: "us-west-2:8f191bd7-0ef1-43e1-9166-7c93922ad092"
   }
 };
 

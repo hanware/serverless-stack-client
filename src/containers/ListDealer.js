@@ -7,8 +7,8 @@ import { API } from "aws-amplify";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function Home() {
-  const [notes, setNotes] = useState([]);
+export default function ListDealer() {
+  const [dealerships, setDealerships] = useState([]);
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,8 +19,8 @@ export default function Home() {
       }
 
       try {
-        const notes = await loadNotes();
-        setNotes(notes);
+        const dealerships = await loadDealerships();
+        setDealerships(dealerships);
       } catch (e) {
         onError(e);
       }
@@ -31,23 +31,23 @@ export default function Home() {
     onLoad();
   }, [isAuthenticated]);
 
-  function loadNotes() {
-    return API.get("notes", "/notes");
+  function loadDealerships() {
+    return API.get("dealerships", "/dealerships");
   }
-  
-  function renderNotesList(notes) {
-    return [{}].concat(notes).map((note, i) =>
+
+  function renderDealershipsList(dealerships) {
+    return [{}].concat(dealerships).map((dealership, i) =>
       i !== 0 ? (
-        <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
-          <ListGroupItem header={note.content.trim().split("\n")[0]}>
-            {"Created: " + new Date(note.createdAt).toLocaleString()}
+        <LinkContainer key={dealership.dealershipId} to={`/dealership/${dealership.dealershipId}`}>
+          <ListGroupItem header={dealership.dealershipname}>
+            {"Created: " + new Date(dealership.createdAt).toLocaleString()}
           </ListGroupItem>
         </LinkContainer>
       ) : (
-          <LinkContainer key="new" to="/notes/new">
+          <LinkContainer key="dealership" to="/dealership">
             <ListGroupItem>
               <h4>
-                <b>{"\uFF0B"}</b> Create a new note
+                <b>{"\uFF0B"}</b> Add a Dealership
             </h4>
             </ListGroupItem>
           </LinkContainer>
@@ -59,7 +59,7 @@ export default function Home() {
     return (
       <div className="lander">
         <h1>Appreciation</h1>
-        <p>A simple note taking app</p>
+        <p>Dealerships</p>
         <div>
           <Link to="/login" className="btn btn-info btn-lg">
             Login
@@ -67,7 +67,7 @@ export default function Home() {
           <Link to="/signup" className="btn btn-success btn-lg">
             Signup
           </Link>
-          <Link to="/dealer" className="btn btn-dealer btn-lg">
+          <Link to="/dealership" className="btn btn-success btn-lg">
             Dealer
           </Link>
         </div>
@@ -75,12 +75,12 @@ export default function Home() {
     );
   }
 
-  function renderNotes() {
+  function renderDealerships() {
     return (
       <div className="notes">
-        <PageHeader>Your Notes</PageHeader>
+        <PageHeader>Dealerships</PageHeader>
         <ListGroup>
-          {!isLoading && renderNotesList(notes)}
+          {!isLoading && renderDealershipsList(dealerships)}
         </ListGroup>
       </div>
     );
@@ -88,7 +88,9 @@ export default function Home() {
 
   return (
     <div className="Home">
-      {isAuthenticated ? renderNotes() : renderLander()}
+      {isAuthenticated ? renderDealerships() : renderLander()}
     </div>
   );
 }
+
+//.trim().split("\n")[0]
