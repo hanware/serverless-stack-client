@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
-import { useAppContext } from "../libs/contextLib";
-import { onError } from "../libs/errorLib";
-import "./Home.css";
+import { useAppContext } from "../../libs/contextLib";
+import { onError } from "../../libs/errorLib";
+import "../Home.css";
 import { API } from "aws-amplify";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function ListDealer() {
+export default function ListDealerships() {
   const [dealerships, setDealerships] = useState([]);
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +32,7 @@ export default function ListDealer() {
   }, [isAuthenticated]);
 
   function loadDealerships() {
-    return API.get("dealerships", "/dealerships");
+    return API.get("appreciation", "/dealerships");
   }
 
   function renderDealershipsList(dealerships) {

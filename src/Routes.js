@@ -1,23 +1,22 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import AddDealership from "./containers/AddDealership";
-import ListDealer from "./containers/ListDealer";
-import ViewDealership from "./containers/ViewDealer";
+import AddDealership from "./containers/dealerships/AddDealership";
+import ViewDealership from "./containers/dealerships/ViewDealership";
+import ListDealerships from "./containers/dealerships/ListDealerships";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
-import NewNote from "./containers/NewNote";
-import Notes from "./containers/Notes";
 import Settings from "./containers/Settings";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
-import AddDealer from "./containers/AddDealer";
+import AddDealer from "./containers/dealer/AddDealer";
+import ViewDealer from "./containers/dealer/ViewDealer";
 
 export default function Routes() {
   return (
     <Switch>
       <Route exact path="/">
-        <ListDealer />
+        <ListDealerships />
       </Route>
       <UnauthenticatedRoute exact path="/login">
         <Login />
@@ -31,17 +30,17 @@ export default function Routes() {
       <AuthenticatedRoute exact path="/dealership">
         <AddDealership />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/notes/new">
-        <NewNote />
+      <AuthenticatedRoute exact path="/dealership">
+        <AddDealership />
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/dealership/:id/">
         <ViewDealership />
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/dealer/:id/">
-        <AddDealer />
+        <ViewDealer />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/notes/:id">
-        <Notes />
+      <AuthenticatedRoute exact path="/dealer/">
+        <AddDealer />
       </AuthenticatedRoute>
       <Route>
         <NotFound />

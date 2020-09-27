@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { API, Storage } from "aws-amplify";
-import { onError } from "../libs/errorLib";
+import { onError } from "../../libs/errorLib";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { ListGroupItem } from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
-import config from "../config";
-import "./ViewDealer.css";
-import { s3Upload } from "../libs/awsLibs";
+import LoaderButton from "../../components/LoaderButton";
+import config from "../../config";
+import "./ViewDealership.css";
+import { s3Upload } from "../../libs/awsLibs";
 import { LinkContainer } from "react-router-bootstrap";
 
 export default function ViewDealership() {
@@ -22,7 +22,7 @@ export default function ViewDealership() {
 
   useEffect(() => {
     function loadDealership() {
-      return API.get("dealerships", `/dealerships/${id}`);
+      return API.get("appreciation", `/dealerships/${id}`);
     }
 
     async function onLoad() {
@@ -47,7 +47,7 @@ export default function ViewDealership() {
   }
 
   function saveDealership(dealerships) {
-    return API.put("dealerships", `/dealerships/${id}`, {
+    return API.put("appreciation", `/dealerships/${id}`, {
       body: dealerships,
     });
   }
@@ -75,7 +75,7 @@ export default function ViewDealership() {
 }
 
   function deleteDealership() {
-    return API.del("dealerships", `/dealerships/${id}`);
+    return API.del("appreciation", `/dealerships/${id}`);
   }
 
   async function handleDelete(event) {

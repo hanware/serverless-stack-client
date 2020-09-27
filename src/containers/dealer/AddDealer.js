@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { useFormFields } from "../libs/hooksLib";
+import { useFormFields } from "../../libs/hooksLib";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
-import { onError } from "../libs/errorLib";
-import "./AddDealership.css";
+import LoaderButton from "../../components/LoaderButton";
+import { onError } from "../../libs/errorLib";
+import "./AddDealer.css";
 import { API } from "aws-amplify";
 import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
 
@@ -30,8 +30,8 @@ export default function AddDealer() {
 //       );
 //   }
 
-  function deleteDealership() {
-    return API.del("dealerships", `/dealerships/${id}`);
+  function deleteDealer() {
+    return API.del("appreciation", `/dealerships/${id}`);
   }
 
   function validateForm() {
@@ -65,7 +65,7 @@ export default function AddDealer() {
   }
 
   function createDealer(dealer) {
-    return API.post("dealerships", "/dealerships", {
+    return API.post("appreciation", "/dealer", {
       body: dealer,
     });
   }
@@ -82,7 +82,7 @@ export default function AddDealer() {
             onChange={handleFieldChange}
           />
         </FormGroup>
-        <FormGroup controlId="dealersecondname" bsSize="large">
+        <FormGroup controlId="dealerlastname" bsSize="large">
           <ControlLabel>Second Name</ControlLabel>
           <FormControl
             autoFocus

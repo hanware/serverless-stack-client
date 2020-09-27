@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useFormFields } from "../libs/hooksLib";
+import { useFormFields } from "../../libs/hooksLib";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
-import { onError } from "../libs/errorLib";
+import LoaderButton from "../../components/LoaderButton";
+import { onError } from "../../libs/errorLib";
 import "./AddDealership.css";
 import { API } from "aws-amplify";
 
@@ -67,7 +67,7 @@ export default function AddDealership() {
   }
 
   function createDealer(dealer) {
-    return API.post("dealerships", "/dealerships", {
+    return API.post("appreciation", "/dealerships", {
       body: dealer,
     });
   }

@@ -26,7 +26,7 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: "dealerships",
+        name: "appreciation",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION
       },
