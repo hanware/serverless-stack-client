@@ -13,18 +13,19 @@ export default function ViewDealer() {
   const history = useHistory();
   //const [dealership, setDealership] = useState(null);
   //const [dealershipname, setDealershipname] = useState("");
+  const [dealer, setDealer] = useState(null)
   const [dealerfirstname, setDealerfirstname] = useState("");
   const [dealerlastname, setDealerlastname] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  //const [address, setAddress] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [createdAt, setCreatedAt] = useState(null);
+  //const [createdAt, setCreatedAt] = useState(null);
 
   useEffect(() => {
     function loadDealer() {
-      return API.get("appreciation", `/dealer/${id}`);
+      return API.get("appreciation", `/dealer/`);
     }
 
     async function onLoad() {
@@ -49,7 +50,7 @@ export default function ViewDealer() {
   }
 
   function saveDealer(dealer) {
-    return API.put("appreciation", `/dealer/${id}`, {
+    return API.put("appreciation", `/dealer/`, {
       body: dealer,
     });
   }
@@ -79,7 +80,7 @@ export default function ViewDealer() {
 }
 
   function deleteDealer() {
-    return API.del("appreciation", `/dealer/${id}`);
+    return API.del("appreciation", `/dealer/`);
   }
 
   async function handleDelete(event) {
@@ -106,7 +107,7 @@ export default function ViewDealer() {
 
   return (
     <div className="Dealer">
-      {dealerfirstname && (
+      {dealer && (
         <form onSubmit={handleSubmit}>
           <FormGroup controlId="dealerfirstname">
             <FormControl
@@ -188,3 +189,9 @@ export default function ViewDealer() {
     </div>
   );
 }
+
+
+
+
+
+//${id}
