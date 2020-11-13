@@ -9,7 +9,7 @@ import Signup from "./containers/Signup";
 import Settings from "./containers/Settings";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
-import AddDealer from "./containers/dealer/AddDealer";
+//import AddListDealer from "./containers/dealer/AddListDealer";
 import ViewDealer from "./containers/dealer/ViewDealer";
 
 export default function Routes() {
@@ -30,17 +30,11 @@ export default function Routes() {
       <AuthenticatedRoute exact path="/dealership">
         <AddDealership />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/dealership">
-        <AddDealership />
-      </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/dealership/:id/">
         <ViewDealership />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/dealer/:id/">
+      <AuthenticatedRoute exact path="/dealer/:id/:dealerid">
         <ViewDealer />
-      </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/dealer/">
-        <AddDealer />
       </AuthenticatedRoute>
       <Route>
         <NotFound />

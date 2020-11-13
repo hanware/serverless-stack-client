@@ -11,7 +11,7 @@ import { s3Upload } from "../../libs/awsLibs";
 import { LinkContainer } from "react-router-bootstrap";
 
 export default function ViewDealership() {
-  const { id } = useParams();
+  const { id, dealerid } = useParams();
   const history = useHistory();
   const [dealership, setDealership] = useState(null);
   const [dealershipname, setDealershipname] = useState("");
@@ -19,6 +19,7 @@ export default function ViewDealership() {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [createdAt, setCreatedAt] = useState(null);
+  const [ dealers, setDealers ] = useState([]);
 
   useEffect(() => {
     function loadDealership() {
@@ -34,6 +35,9 @@ export default function ViewDealership() {
         setDealershipname(dealershipname);
         setAddress(address);
         setCreatedAt(createdAt);
+
+        const dealers = await loadDealers();
+        setDealers(dealers);
       } catch (e) {
         onError(e);
       }
@@ -44,6 +48,10 @@ export default function ViewDealership() {
 
   function validateForm() {
     return dealershipname.length > 0 && address.lenght > 0;
+  }
+
+  function loadDealers() {
+    return API.get("appreciation", `/dealers/${id}`);
   }
 
   function saveDealership(dealerships) {
@@ -58,21 +66,17 @@ export default function ViewDealership() {
     setIsLoading(true);
 
     try {
-
       await saveDealership({
         dealershipname,
         address,
       });
+
       history.push("/");
     } catch (e) {
       onError(e);
       setIsLoading(false);
     }
   }
-
-  function handleFileChange(event) {
-
-}
 
   function deleteDealership() {
     return API.del("appreciation", `/dealerships/${id}`);
@@ -127,51 +131,35 @@ export default function ViewDealership() {
             />
           </FormGroup>
           <FormGroup>
-          <LinkContainer key="dealer" to="/dealer/${id}">
-            <ListGroupItem>
-              <h4>
-                <b>{"\uFF0B"}</b> Add a Dealer
-            </h4>
-            </ListGroupItem>
-          </LinkContainer>
+            <LinkContainer key="dealer" to={`/dealer/${id}`}>
+              <ListGroupItem>
+                <h4>
+                  <b>{"\uFF0B"}</b> Add a Dealer
+                </h4>
+              </ListGroupItem>
+            </LinkContainer>
           </FormGroup>
-          {/* {note.attachment && (
-                        <FormGroup>
-                            <ControlLabel>Attachment</ControlLabel>
-                            <FormControl.Static>
-                                <a
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    href={note.attachmentURL}
-                                >
-                                    {formatFilename(note.attachment)}
-                                </a>
-                            </FormControl.Static>
-                        </FormGroup> */}
-          {/* )} */}
-          {/* <FormGroup controlId="file">
-                        {!note.attachment && <ControlLabel>Attachment</ControlLabel>}
-                        <FormControl onChange={handleFileChange} type="file" />
-                    </FormGroup> */}
+          <FormGroup>
+            {dealers && dealers.map((dealer, i) => (
+              <LinkContainer
+                key={dealer.dealerId}
+                to={`/dealer/${id}/${dealer.dealerId}`}
+              >
+                <ListGroupItem header={dealer.dealerfirstname + " " + dealer.dealerlastname}>
+                  {"Created: " + new Date(dealer.createdAt).toLocaleString()}
+                </ListGroupItem>
+              </LinkContainer>
+            ))}
+          </FormGroup>
           <LoaderButton
             block
             type="submit"
             bsSize="large"
             bsStyle="primary"
             isLoading={isLoading}
-            //disabled={!validateForm()}
-            onChange={handleFileChange}
+            // onChange={handleFileChange}
           >
             Save
-          </LoaderButton>
-          <LoaderButton
-            block
-            bsSize="large"
-            bsStyle="danger"
-            onClick={handleDelete}
-            isLoading={isDeleting}
-          >
-            Delete
           </LoaderButton>
         </form>
       )}

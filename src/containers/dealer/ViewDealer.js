@@ -9,7 +9,7 @@ import "./ViewDealer.css";
 import { LinkContainer } from "react-router-bootstrap";
 
 export default function ViewDealer() {
-  const { id } = useParams();
+  const { id ,dealerid} = useParams();
   const history = useHistory();
   //const [dealership, setDealership] = useState(null);
   //const [dealershipname, setDealershipname] = useState("");
@@ -25,7 +25,7 @@ export default function ViewDealer() {
 
   useEffect(() => {
     function loadDealer() {
-      return API.get("appreciation", `/dealer/`);
+      return API.get("appreciation", `/dealer/${id}/${dealerid}`);
     }
 
     async function onLoad() {
@@ -37,6 +37,7 @@ export default function ViewDealer() {
         setDealerlastname(dealerlastname);
         setEmail(email);
         setPhone(phone);
+        setDealer(dealer)
       } catch (e) {
         onError(e);
       }
@@ -50,7 +51,7 @@ export default function ViewDealer() {
   }
 
   function saveDealer(dealer) {
-    return API.put("appreciation", `/dealer/`, {
+    return API.put("appreciation", `/dealer/{id}/{dealerid}`, {
       body: dealer,
     });
   }
@@ -137,7 +138,7 @@ export default function ViewDealer() {
               onChange={(e) => setPhone(e.target.value)}
             />
           </FormGroup>
-          <FormGroup>
+          {/* <FormGroup>
           <LinkContainer key="dealer" to="/dealer/${id}">
             <ListGroupItem>
               <h4>
@@ -145,7 +146,7 @@ export default function ViewDealer() {
             </h4>
             </ListGroupItem>
           </LinkContainer>
-          </FormGroup>
+          </FormGroup> */}
           {/* {note.attachment && (
                         <FormGroup>
                             <ControlLabel>Attachment</ControlLabel>
@@ -190,8 +191,3 @@ export default function ViewDealer() {
   );
 }
 
-
-
-
-
-//${id}
